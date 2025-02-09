@@ -9,6 +9,7 @@ import BusIcon from "./components/BusIcon";
 import AirportTransportIcon from "./components/AirportTransportIcon";
 import CarRentalIcon from "./components/CarRentalIcon";
 import XperienceIcon from "./components/XperienceIcon";
+import Link from "next/link";
 
 const Home = () => {
   const [activeButton, setActiveButton] = useState("Hotels");
@@ -134,12 +135,12 @@ const Home = () => {
             </div>
             <div className="flex flex-col gap-4">
               <label className="opacity-0">adaw</label>
-              <button
-                className="px-4 outline-none border-4 border-l-0 border-[#cdd0d1] rounded-r-xl bg-[#ff5e1f] hover:bg-[#e54d1a] active:bg-[#cc4416] h-[50px] transition-all duration-300"
-                type="submit"
+              <Link
+                href="/search"
+                className="px-4 outline-none border-4 border-l-0 border-[#cdd0d1] rounded-r-xl bg-[#ff5e1f] hover:bg-[#e54d1a] active:bg-[#cc4416] h-[50px] transition-all duration-300 flex items-center justify-center"
               >
                 <SearchIcon width={24} height={24} stroke="#FFFFFF" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>

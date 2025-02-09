@@ -1,12 +1,21 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import UserIcon from "./UserIcon";
 import FlagIcon from "./FlagIcon";
+import TravelokaLogo from "./TravelokaLogo";
 
 const Navbar = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const toggleDropdown = () => {
     setDropdownVisible(!isDropdownVisible);
@@ -76,20 +85,32 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-transparent">
+    <nav
+      className={`sticky top-0 z-50 shadow-md ${
+        isMounted && pathname === "/search" ? "bg-white" : "bg-transparent"
+      }`}
+    >
       <div className="flex items-center justify-between py-4 px-52">
         <div className="logo">
-          <Link href="/en-id">
-            <Image
-              src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/f/fbab4f587da2242fbe9858fe3e5ba717.svg"
-              width={135}
-              height={43}
-              alt="Logo"
+          <Link href="/">
+            <TravelokaLogo
+              fillTulisan={
+                isMounted && pathname === "/search" ? "#03121a" : "white"
+              }
+              fillBurung={
+                isMounted && pathname === "/search" ? "#1BA0E2" : "white"
+              }
             />
           </Link>
         </div>
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 cursor-pointer text-white font-semibold py-2 px-4 rounded-lg hover:bg-[rgba(0,0,0,0.25)]">
+          <div
+            className={`flex items-center gap-2 cursor-pointer font-semibold py-2 px-4 rounded-lg hover:bg-[rgba(0,0,0,0.25)] ${
+              isMounted && pathname === "/search"
+                ? "text-gray-900"
+                : "text-white"
+            }`}
+          >
             <FlagIcon />
             <span>EN | IDR</span>
             <Image
@@ -99,7 +120,13 @@ const Navbar = () => {
               alt="Dropdown"
             />
           </div>
-          <div className="flex items-center gap-2 text-white font-semibold">
+          <div
+            className={`flex items-center gap-2 font-semibold ${
+              isMounted && pathname === "/search"
+                ? "text-gray-900"
+                : "text-white"
+            }`}
+          >
             {otherLinks.map((link) => (
               <Link
                 key={link.href}
@@ -113,9 +140,25 @@ const Navbar = () => {
               Support
             </div>
           </div>
-          <div className="flex items-center gap-2 text-white font-semibold">
-            <div className="flex items-center gap-2 cursor-pointer py-2 px-4 rounded-lg border border-white hover:bg-[rgba(0,0,0,0.25)]">
-              <UserIcon fill="white" />
+          <div
+            className={`flex items-center gap-2 font-semibold ${
+              isMounted && pathname === "/search"
+                ? "text-gray-900"
+                : "text-white"
+            }`}
+          >
+            <div
+              className={`flex items-center gap-2 cursor-pointer py-2 px-4 rounded-lg border hover:bg-[rgba(0,0,0,0.25)] ${
+                isMounted && pathname === "/search"
+                  ? "border-[#0194f3]"
+                  : "border-white"
+              }`}
+            >
+              <UserIcon
+                fill={`${
+                  isMounted && pathname === "/search" ? "#0194f3" : "white"
+                }`}
+              />
               <span>Log In</span>
             </div>
             <div className="cursor-pointer py-2 px-4 rounded-lg border border-[#0194f3] bg-[#0194f3] hover:bg-[rgb(0,124,232)] hover:border-[rgb(0,124,232)]">
@@ -124,7 +167,11 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="flex items-center py-2 px-52 gap-2 font-semibold text-white border-t border-b border-[rgba(255,255,255,0.1)]">
+      <div
+        className={`flex items-center py-2 px-52 gap-2 font-semibold border-t border-b border-[rgba(255,255,255,0.1)] ${
+          isMounted && pathname === "/search" ? "text-gray-900" : "text-white"
+        }`}
+      >
         {mainLinks.map((link) => (
           <Link
             key={link.href}
