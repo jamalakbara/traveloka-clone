@@ -209,7 +209,7 @@ const Page = () => {
             Log In/Register
           </button>
         </div>
-        <div className="flex flex-col gap-4 shadow-md">
+        <div className="flex flex-col gap-4">
           {hotels.map((hotel, index) => (
             <HotelCard key={index} {...hotel} />
           ))}
