@@ -89,20 +89,6 @@ const PriceRangeCard = () => {
             width: `${((maxPrice - minPrice) / 16000000) * 100}%`,
           }}
         />
-        <div
-          className="absolute -top-2 w-6 h-6 bg-blue-500 rounded-full cursor-pointer"
-          style={{
-            left: `${(minPrice / 16000000) * 100}%`,
-            transform: "translateX(-50%)",
-          }}
-        />
-        <div
-          className="absolute -top-2 w-6 h-6 bg-blue-500 rounded-full cursor-pointer"
-          style={{
-            left: `${(maxPrice / 16000000) * 100}%`,
-            transform: "translateX(-50%)",
-          }}
-        />
       </div>
     </div>
   );
