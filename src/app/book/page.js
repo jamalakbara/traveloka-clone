@@ -1,8 +1,7 @@
-// app/search/page.js
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import HotelIcon from "../components/HotelIcon";
 import ContactForm from "../components/ContactForm";
 import GuestOption from "../components/GuestOption";
@@ -10,7 +9,7 @@ import PriceBreakdown from "../components/PriceBreakdown";
 import CancellationPolicy from "../components/CancellationPolicy";
 import HotelInfo from "../components/HotelInfo";
 
-export default function SearchPage() {
+function SearchPageContent() {
   const searchParams = useSearchParams();
   const [hotel, setHotel] = useState({
     banner: searchParams.get("banner"),
@@ -34,5 +33,13 @@ export default function SearchPage() {
         <CancellationPolicy />
       </div>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchPageContent />
+    </Suspense>
   );
 }
