@@ -86,141 +86,151 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-50 shadow-md ${
-        isMounted && pathname === "/search" ? "bg-white" : "bg-transparent"
-      }`}
+      className={`top-0 z-50 shadow-md ${
+        (isMounted && pathname === "/search") || pathname === "/book"
+          ? "bg-white"
+          : "bg-transparent"
+      } ${pathname === "/book" ? "relative" : "sticky"}`}
     >
       <div className="flex items-center justify-between py-4 px-52">
         <div className="logo">
           <Link href="/">
             <TravelokaLogo
               fillTulisan={
-                isMounted && pathname === "/search" ? "#03121a" : "white"
+                (isMounted && pathname === "/search") || pathname === "/book"
+                  ? "#03121a"
+                  : "white"
               }
               fillBurung={
-                isMounted && pathname === "/search" ? "#1BA0E2" : "white"
+                (isMounted && pathname === "/search") || pathname === "/book"
+                  ? "#1BA0E2"
+                  : "white"
               }
             />
           </Link>
         </div>
-        <div className="flex items-center gap-4">
-          <div
-            className={`flex items-center gap-2 cursor-pointer font-semibold py-2 px-4 rounded-lg hover:bg-[rgba(0,0,0,0.25)] ${
-              isMounted && pathname === "/search"
-                ? "text-gray-900"
-                : "text-white"
-            }`}
-          >
-            <FlagIcon />
-            <span>EN | IDR</span>
-            <Image
-              src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/4/4dc239187a96e2c5b5bf278af10fe414.svg"
-              width={12}
-              height={12}
-              alt="Dropdown"
-            />
-          </div>
-          <div
-            className={`flex items-center gap-2 font-semibold ${
-              isMounted && pathname === "/search"
-                ? "text-gray-900"
-                : "text-white"
-            }`}
-          >
-            {otherLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="cursor-pointer py-2 px-4 rounded-lg hover:bg-[rgba(0,0,0,0.25)]"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div className="cursor-pointer py-2 px-4 rounded-lg hover:bg-[rgba(0,0,0,0.25)]">
-              Support
-            </div>
-          </div>
-          <div
-            className={`flex items-center gap-2 font-semibold ${
-              isMounted && pathname === "/search"
-                ? "text-gray-900"
-                : "text-white"
-            }`}
-          >
+        {pathname !== "/book" && (
+          <div className="flex items-center gap-4">
             <div
-              className={`flex items-center gap-2 cursor-pointer py-2 px-4 rounded-lg border hover:bg-[rgba(0,0,0,0.25)] ${
+              className={`flex items-center gap-2 cursor-pointer font-semibold py-2 px-4 rounded-lg hover:bg-[rgba(0,0,0,0.25)] ${
                 isMounted && pathname === "/search"
-                  ? "border-[#0194f3]"
-                  : "border-white"
+                  ? "text-gray-900"
+                  : "text-white"
               }`}
             >
-              <UserIcon
-                fill={`${
-                  isMounted && pathname === "/search" ? "#0194f3" : "white"
-                }`}
+              <FlagIcon />
+              <span>EN | IDR</span>
+              <Image
+                src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/4/4dc239187a96e2c5b5bf278af10fe414.svg"
+                width={12}
+                height={12}
+                alt="Dropdown"
               />
-              <span>Log In</span>
             </div>
-            <div className="cursor-pointer py-2 px-4 rounded-lg border border-[#0194f3] bg-[#0194f3] hover:bg-[rgb(0,124,232)] hover:border-[rgb(0,124,232)]">
-              <span className="text-white font-semibold">Register</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className={`flex items-center py-2 px-52 gap-2 font-semibold border-t border-b border-[rgba(255,255,255,0.1)] ${
-          isMounted && pathname === "/search" ? "text-gray-900" : "text-white"
-        }`}
-      >
-        {mainLinks.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className="cursor-pointer py-2 px-4 rounded-lg hover:bg-[rgba(0,0,0,0.25)]"
-          >
-            {link.label}
-          </Link>
-        ))}
-        <div
-          className={`relative cursor-pointer py-2 px-4 rounded-lg ${
-            isDropdownVisible ? "bg-[rgba(0,0,0,0.25)]" : ""
-          } hover:bg-[rgba(0,0,0,0.25)]`}
-          onClick={toggleDropdown}
-        >
-          <div className="flex items-center gap-2">
-            <span>More</span>
-            <Image
-              src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/4/4dc239187a96e2c5b5bf278af10fe414.svg"
-              width={12}
-              height={12}
-              alt="Dropdown"
-            />
-          </div>
-          <div
-            className={`${
-              isDropdownVisible ? "flex" : "hidden"
-            } min-w-[256px] absolute bg-white shadow-lg z-10 rounded-xl top-8 left-0`}
-          >
-            <div className="flex flex-col w-full gap-1 text-gray-500">
-              {dropdownLinks.map((link) => (
+            <div
+              className={`flex items-center gap-2 font-semibold ${
+                isMounted && pathname === "/search"
+                  ? "text-gray-900"
+                  : "text-white"
+              }`}
+            >
+              {otherLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center p-4 rounded-xl hover:bg-gray-100 gap-2"
+                  className="cursor-pointer py-2 px-4 rounded-lg hover:bg-[rgba(0,0,0,0.25)]"
                 >
-                  <Image
-                    src={link.icon}
-                    width={20}
-                    height={20}
-                    alt={link.label}
-                  />
-                  <span>{link.label}</span>
+                  {link.label}
                 </Link>
               ))}
+              <div className="cursor-pointer py-2 px-4 rounded-lg hover:bg-[rgba(0,0,0,0.25)]">
+                Support
+              </div>
+            </div>
+            <div
+              className={`flex items-center gap-2 font-semibold ${
+                isMounted && pathname === "/search"
+                  ? "text-gray-900"
+                  : "text-white"
+              }`}
+            >
+              <div
+                className={`flex items-center gap-2 cursor-pointer py-2 px-4 rounded-lg border hover:bg-[rgba(0,0,0,0.25)] ${
+                  isMounted && pathname === "/search"
+                    ? "border-[#0194f3]"
+                    : "border-white"
+                }`}
+              >
+                <UserIcon
+                  fill={`${
+                    isMounted && pathname === "/search" ? "#0194f3" : "white"
+                  }`}
+                />
+                <span>Log In</span>
+              </div>
+              <div className="cursor-pointer py-2 px-4 rounded-lg border border-[#0194f3] bg-[#0194f3] hover:bg-[rgb(0,124,232)] hover:border-[rgb(0,124,232)]">
+                <span className="text-white font-semibold">Register</span>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+      {pathname !== "/book" && (
+        <div
+          className={`flex items-center py-2 px-52 gap-2 font-semibold border-t border-b border-[rgba(255,255,255,0.1)] ${
+            isMounted && pathname === "/search" ? "text-gray-900" : "text-white"
+          }`}
+        >
+          {mainLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="cursor-pointer py-2 px-4 rounded-lg hover:bg-[rgba(0,0,0,0.25)]"
+            >
+              {link.label}
+            </Link>
+          ))}
+          <div
+            className={`relative cursor-pointer py-2 px-4 rounded-lg ${
+              isDropdownVisible ? "bg-[rgba(0,0,0,0.25)]" : ""
+            } hover:bg-[rgba(0,0,0,0.25)]`}
+            onClick={toggleDropdown}
+          >
+            <div className="flex items-center gap-2">
+              <span>More</span>
+              <Image
+                src="https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/4/4dc239187a96e2c5b5bf278af10fe414.svg"
+                width={12}
+                height={12}
+                alt="Dropdown"
+              />
+            </div>
+            <div
+              className={`${
+                isDropdownVisible ? "flex" : "hidden"
+              } min-w-[256px] absolute bg-white shadow-lg z-10 rounded-xl top-8 left-0`}
+            >
+              <div className="flex flex-col w-full gap-1 text-gray-500">
+                {dropdownLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="flex items-center p-4 rounded-xl hover:bg-gray-100 gap-2"
+                  >
+                    <Image
+                      src={link.icon}
+                      width={20}
+                      height={20}
+                      alt={link.label}
+                    />
+                    <span>{link.label}</span>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 };
