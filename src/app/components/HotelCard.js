@@ -1,7 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import HotelIcon from "./HotelIcon";
 import StarIcon from "./StarIcon";
 import MapLocationIcon from "./MapLocationIcon";
+import Link from "next/link";
 
 const HotelCard = ({
   banner,
@@ -12,6 +15,20 @@ const HotelCard = ({
   discountedPrice,
   originalPrice,
 }) => {
+  const handleSelectRoom = () => {
+    const query = new URLSearchParams({
+      banner,
+      hotelName,
+      type,
+      ratings,
+      features: JSON.stringify(features),
+      discountedPrice,
+      originalPrice,
+    }).toString();
+
+    window.location.href = `/book?${query}`;
+  };
+
   return (
     <div className="flex bg-white rounded-lg shadow-md overflow-hidden w-full border border-gray-200">
       <div className="relative w-1/4 flex-none h-40">
@@ -81,7 +98,10 @@ const HotelCard = ({
           <p className="text-xs text-gray-500">Exclude taxes & fees</p>
         </div>
         {/* CTA Button */}
-        <button className="bg-orange-500 text-white font-semibol py-2 px-4 rounded-md hover:bg-orange-600 transition">
+        <button
+          className="bg-orange-500 text-white font-semibol py-2 px-4 rounded-md hover:bg-orange-600 transition"
+          onClick={handleSelectRoom}
+        >
           Select Room
         </button>
       </div>
